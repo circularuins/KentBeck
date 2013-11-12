@@ -13,7 +13,7 @@ sub new {
     }, $class;
 }
 
-sub get_amount {
+sub private_get_amount {
     my $self = shift;
     return $self->{amount};
 }
@@ -22,7 +22,13 @@ sub times {
     my $self = shift;
     my $multiplier = shift;
 
-    return Dollar->new($self->{amount} * $multiplier);
+    return Dollar->new($self->private_get_amount() * $multiplier);
+}
+
+sub equals {
+    my $self = shift;
+    my $arg = shift;
+    return $self->private_get_amount() == $arg->private_get_amount();
 }
 
 1;
