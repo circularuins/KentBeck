@@ -1,4 +1,4 @@
-package Dollar;
+package Franc;
 use strict;
 use warnings;
 use utf8;
@@ -10,9 +10,7 @@ sub times {
     my $self = shift;
     my $multiplier = shift;
 
-    return Dollar->new($self->protected_get_amount() * $multiplier);
+    return Franc->new($self->protected_get_amount() * $multiplier);
 }
 
 1;
-
-
