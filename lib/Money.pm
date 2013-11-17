@@ -8,23 +8,23 @@ use Franc;
 use Data::Dumper;
 
 sub new {
-    my $class  = shift;
-    my $amount = shift;
+    my ($class, $amount, $currency)  = @_;
 
     bless {
-        amount => $amount,
+        protected_amount => $amount,
+        protected_currency => $currency,
     }, $class;
 }
 
 sub protected_get_amount {
     my $self = shift;
-    return $self->{amount};
+    return $self->{protected_amount};
 }
 
 sub equals {
     my $self = shift;
     my $money = shift;
-    return $self->protected_get_amount() == $money->protected_get_amount()
+    return $self->{protected_amount} == $money->{protected_amount}
         && ref $self eq ref $money; #同一クラスの比較の場合のみ真
 }
 
@@ -32,30 +32,20 @@ sub dollar {
     my $self = shift;
     my $amount = shift;
 
-    return Dollar->new($amount);
+    return Dollar->new($amount, "USD");
 }
 
 sub franc {
     my $self = shift;
     my $amount = shift;
 
-    return Franc->new($amount);
+    return Franc->new($amount, "CHF");
+}
+
+sub currency {
+    my $self = shift;
+
+    return $self->{protected_currency};
 }
 
 1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

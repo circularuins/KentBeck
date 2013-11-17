@@ -31,4 +31,9 @@ subtest 'フランとドルの等価性のテスト' => sub {
     ok !Money->franc(5)->equals(Money->dollar(5)), '5CHFと5$は等しくない';
 };
 
+subtest '通貨のテスト' => sub {
+    is Money->dollar(1)->currency(), "USD", "文字列USDを返すこと";
+    is Money->franc(1)->currency(), "CHF", "文字列CHFを返すこと";
+};
+
 done_testing;

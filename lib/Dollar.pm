@@ -10,22 +10,7 @@ sub times {
     my $self = shift;
     my $multiplier = shift;
 
-    return Dollar->new($self->protected_get_amount() * $multiplier);
+    return Dollar->new($self->{protected_amount} * $multiplier);
 }
 
 1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
