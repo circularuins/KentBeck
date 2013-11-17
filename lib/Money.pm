@@ -3,8 +3,6 @@ use strict;
 use warnings;
 use utf8;
 use feature 'say';
-use Dollar;
-use Franc;
 use Data::Dumper;
 
 sub new {
@@ -25,27 +23,34 @@ sub equals {
     my $self = shift;
     my $money = shift;
     return $self->{protected_amount} == $money->{protected_amount}
-        && ref $self eq ref $money; #同一クラスの比較の場合のみ真
+        && $self->currency() eq $money->currency();
 }
 
 sub dollar {
     my $self = shift;
     my $amount = shift;
 
-    return Dollar->new($amount, "USD");
+    return Money->new($amount, "USD");
 }
 
 sub franc {
     my $self = shift;
     my $amount = shift;
 
-    return Franc->new($amount, "CHF");
+    return Money->new($amount, "CHF");
 }
 
 sub currency {
     my $self = shift;
 
     return $self->{protected_currency};
+}
+
+sub times {
+    my $self = shift;
+    my $multiplier = shift;
+
+    return Money->new($self->{protected_amount} * $multiplier, $self->{protected_currency});
 }
 
 1;
