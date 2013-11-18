@@ -4,6 +4,8 @@ use warnings;
 use utf8;
 use feature 'say';
 use Data::Dumper;
+use Bank;
+use Sum;
 
 sub new {
     my ($class, $amount, $currency)  = @_;
@@ -51,6 +53,13 @@ sub times {
     my $multiplier = shift;
 
     return Money->new($self->{protected_amount} * $multiplier, $self->{protected_currency});
+}
+
+sub plus {
+    my $self = shift;
+    my $addend = shift;
+
+    return Sum->new($self, $addend);
 }
 
 1;

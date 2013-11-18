@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use utf8;
 use Test::More;
+use Data::Dumper;
 
 use_ok 'Money';
 
@@ -22,4 +23,20 @@ subtest '通貨のテスト' => sub {
     is Money->franc(1)->currency(), "CHF", '文字列CHFを返すこと';
 };
 
+subtest '加法のテスト1' => sub {
+    my $five = Money->dollar(5);
+    my $result = $five->plus($five);
+    my $sum = $result;
+    ok $five->equals($sum->{augend});
+    ok $five->equals($sum->{addend});
+};
+
+subtest '加法のテスト2' => sub {
+    my $sum = Sum->new(Money->dollar(3), Money->dollar(4));
+    my $bank = Bank->new();
+    my $result = $bank->reduce($sum, "USD");
+    ok Money->dollar(7)->equals($result);
+};
+
 done_testing;
+
