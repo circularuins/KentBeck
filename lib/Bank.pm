@@ -13,8 +13,10 @@ sub reduce {
     my $self = shift;
     my ($source, $to) = @_;
 
-    my $sum = $source;
-    return $sum->reduce($to);
+    # return $source->reduce($to) if ref $source eq "Money";
+    # my $sum = $source;
+    # return $sum->reduce($to);
+    return $source->reduce($to);
 }
 
 1;

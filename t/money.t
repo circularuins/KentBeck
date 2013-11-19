@@ -31,11 +31,17 @@ subtest '加法のテスト1' => sub {
     ok $five->equals($sum->{addend});
 };
 
-subtest '加法のテスト2' => sub {
+subtest 'Sumオブジェクトをreduceするテスト' => sub {
     my $sum = Sum->new(Money->dollar(3), Money->dollar(4));
     my $bank = Bank->new();
     my $result = $bank->reduce($sum, "USD");
     ok Money->dollar(7)->equals($result);
+};
+
+subtest 'Moneyオブジェクトをreduceするテスト' => sub {
+    my $bank = Bank->new();
+    my $result = $bank->reduce(Money->dollar(1), "USD");
+    ok Money->dollar(1)->equals($result);
 };
 
 done_testing;

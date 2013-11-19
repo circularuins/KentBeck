@@ -62,4 +62,11 @@ sub plus {
     return Sum->new($self, $addend);
 }
 
+sub reduce {
+    my $self = shift;
+    my $to = shift;
+
+    return $self;
+}
+
 1;
