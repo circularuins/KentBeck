@@ -44,5 +44,11 @@ subtest 'Moneyオブジェクトをreduceするテスト' => sub {
     ok Money->dollar(1)->equals($result);
 };
 
-done_testing;
+subtest '異なる通貨間の変換テスト' => sub {
+    my $bank = Bank->new();
+    $bank->addrate("CHF", "USD", 2);
+    my $result = $bank->reduce(Money->franc(2), "USD");
+    ok Money->dollar(1)->equals($result), '2CHFは1$と等しい';
+};
 
+done_testing;

@@ -16,7 +16,7 @@ sub new {
 
 sub reduce {
     my $self = shift;
-    my $to = shift;
+    my ($bank, $to) = @_;
 
     my $amount = $self->{augend}->{protected_amount} + $self->{addend}->{protected_amount};
     return Money->new($amount, $to);

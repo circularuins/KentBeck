@@ -64,9 +64,10 @@ sub plus {
 
 sub reduce {
     my $self = shift;
-    my $to = shift;
+    my ($bank, $to) = @_;
 
-    return $self;
+    my $rate = $bank->rate($self->{protected_currency}, $to);
+    return Money->new($self->{protected_amount} / $rate, $to);
 }
 
 1;
